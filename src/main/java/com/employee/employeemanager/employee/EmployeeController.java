@@ -20,6 +20,9 @@ public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    EmployeeService employeeService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
     @PostMapping(path="/", consumes = "application/json", produces = "application/json")
@@ -36,8 +39,8 @@ public class EmployeeController {
 
     @GetMapping(path="/{org}",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Employee> selectSpecific(@PathVariable String org) {
-        return employeeRepository.findByOrganization(org);
+    public List<Employee> selectSpecific(@PathVariable String org) throws Exception {
+        return employeeService.selectAndGroup(org);
     }
 
     @GetMapping(path="/",consumes = "application/json", produces = "application/json")
