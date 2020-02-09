@@ -42,8 +42,12 @@ public class EmployeeController {
 
     @GetMapping(path="/",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Employee> selectAll() {
-        return employeeRepository.findAll();
+    public List<Employee> selectAll(@RequestParam(required = false) String org) {
+        if(org == null){
+            return employeeRepository.findAll();
+        }else{
+            return employeeRepository.findByOrganization(org);
+        }
     }
 
     @DeleteMapping(path="/{id}",consumes = "application/json", produces = "application/json")
