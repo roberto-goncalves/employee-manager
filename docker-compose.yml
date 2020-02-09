@@ -27,7 +27,7 @@ services:
       - ./data/db:/data/db
     ports:
       - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: mongod --logpath=/dev/null # --quiet
     networks:
       vpcbr:
         ipv4_address: 10.5.0.7
