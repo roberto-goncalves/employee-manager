@@ -34,20 +34,16 @@ public class EmployeeController {
         employeeRepository.save(employee);
     }
 
-    @GetMapping(path="/{id}",consumes = "application/json", produces = "application/json")
+    @GetMapping(path="/{org}",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.FOUND)
-    public Optional<Employee> selectSpecific(@PathVariable String id) {
-        return employeeRepository.findById(id);
+    public List<Employee> selectSpecific(@PathVariable String org) {
+        return employeeRepository.findByOrganization(org);
     }
 
     @GetMapping(path="/",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Employee> selectAll(@RequestParam(required = false) String org) {
-        if(org == null){
+    public List<Employee> selectAll() {
             return employeeRepository.findAll();
-        }else{
-            return employeeRepository.findByOrganization(org);
-        }
     }
 
     @DeleteMapping(path="/{id}",consumes = "application/json", produces = "application/json")

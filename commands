@@ -3,3 +3,7 @@ mvn package -Dmaven.test.skip=true && sudo docker-compose up --build
 curl -X GET -H "Content-type: application/json" http://0.0.0.0:8080/employee/ -u swisscom:pass
 
 curl -X GET -H "Content-type: application/json" --resolve 'swiss.com:80:127.0.0.1' http://swiss.com/employee/ -u swisscom:pass
+
+curl -X GET -H "Content-type: application/json" --resolve 'swiss.com:80:127.0.0.1' http://swiss.com/employee/?org='Development' -u swisscom:pass
+
+sudo docker-compose down && mvn package -Dmaven.test.skip=true && sudo docker-compose up --build
