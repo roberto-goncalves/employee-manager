@@ -1,20 +1,20 @@
 # Task-Manager using SpringBoot and MongoDB
 
-1 - Requirements:
+##1 - Requirements:
 
 - Java 8
 - Maven 3.6+
 - Docker
 - Docker-compose
 
-2 - Explanations:
+##2 - Explanations:
 
 - The configuration for mongodb connection is on config/MongoConfig.java, if you have a database accessed to localhost for example, just change there. The default value is mongodb:27017 (used in docker-compose)
 - The MetricFilter class will gather every request made to the api, and save it on mongodb
 - Integration tests is on src/tests
 - The logging is configured also on MetricFilter
 
-3 - Compile & Use API:
+##3 - Compile & Use API:
 
 To compile tests: mvn test or mvn package - Remember to configure your mongodb correct host
 
@@ -31,7 +31,7 @@ sudo docker-compose down && mvn package -Dmaven.test.skip=true && sudo docker-co
 ```
 
 
-4 - Using the API:
+##4 - Using the API:
 
 A instance in AWS was launched at public ip 54.161.4.37
 
@@ -41,6 +41,8 @@ A instance in AWS was launched at public ip 54.161.4.37
 - GET /employee/<organization>  - Get employee by organization with Regex and Insentive
 - DELETE /employee/ - Delete all employee
 
+
+###EMPLOYEE
 /employee
 ```bash
 curl -X GET -H "Content-type: application/json" --resolve 'swiss.com:80:54.161.4.37' http://swiss.com/employee/dev -u swisscom:pass
@@ -81,7 +83,7 @@ curl -X GET -H "Content-type: application/json" --resolve 'swiss.com:80:54.161.4
 	"costcenter": "0093109"
 }]
 ```
-EMPLOYEE API - METRIC
+###EMPLOYEE API - METRIC
 
 - GET /employeemetrics/ - Will return every request made to the API
 - GET /employeemetrics/stats - Will return a statistic metric for every request made, those metrics are: totaltime, totalcount and average response time in ms
@@ -145,7 +147,7 @@ curl -X GET -H "Content-type: application/json" --resolve 'swiss.com:80:54.161.4
 }]
 
 ```
-ACTUATOR
+###ACTUATOR
 /actuator/
 
 - /actuator/auditevents - Exposes audit events (e.g. auth_success, order_failed) for your application
