@@ -15,7 +15,7 @@
 - Integration tests is on src/tests
 - The logging is configured also on MetricFilter
 - The CSV file is loaded from the Spring Boot Application at runtime and inserted on MongoDB
-
+- Regarding to Docker, there is a exemple of running with mvn package (which will be transfered to container) and --build will rebuilt the image (if there is a need of reloading the code)
 
 ### The vRO Workflow
 
@@ -34,7 +34,7 @@ To run in standalone: mvn spring-boot:run - will run on localhost:8080
 
 To run with docker-compose: docker-compose up (need to be on same folder as docker-compose.yml) will bind to 8080 for application and 27017 for mongodb on 0.0.0.0
 
-#### A simple example with whole workflow:
+#### A simple example with maven package and build:
 
 ```bash
 sudo docker-compose down && mvn package -Dmaven.test.skip=true && sudo docker-compose up --build
