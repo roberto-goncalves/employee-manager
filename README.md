@@ -9,10 +9,20 @@
 
 ## 2 - Explanations:
 
+- It was used MongoRepository for most CRUD operations and another operations is in *Service, from Metric and from Employee
 - The configuration for mongodb connection is on config/MongoConfig.java, if you have a database accessed to localhost for example, just change there. The default value is mongodb:27017 (used in docker-compose)
 - The MetricFilter class will gather every request made to the api, and save it on mongodb
 - Integration tests is on src/tests
 - The logging is configured also on MetricFilter
+- The CSV file is loaded from the Spring Boot Application at runtime and inserted on MongoDB
+
+
+### The vRO Workflow
+
+- Starts with a Input: Organization -> Which is the param for querying the API, it can be just: finan (for Finance) or dev (for Development)
+- Next it saves every entry fetched from the API in a String Array and then is passed foward to the Foreach Workflow
+- Inside the Workflow it has a Create simple virtual machine, who expects a VMName which is traversed to every entry
+- The number of the results in the API GET request should be the number of VMs created
 
 ## 3 - Compile & Use API:
 
@@ -24,7 +34,7 @@ To run in standalone: mvn spring-boot:run - will run on localhost:8080
 
 To run with docker-compose: docker-compose up (need to be on same folder as docker-compose.yml) will bind to 8080 for application and 27017 for mongodb on 0.0.0.0
 
-A simple example with whole workflow:
+#### A simple example with whole workflow:
 
 ```bash
 sudo docker-compose down && mvn package -Dmaven.test.skip=true && sudo docker-compose up --build
